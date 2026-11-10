@@ -1,0 +1,23 @@
+# exp05 (optional): alpha/r scaling with tuned and untuned learning rates.
+name: exp05_alpha_scaling
+description: Alpha scaling policies for LoRA with and without validation-tuned learning rates.
+
+target:
+  name: low_rank
+  cfg:
+    true_rank: 8
+    noise_std: 0.01
+    delta_scale: 0.5
+
+methods:
+  - name: lora
+    grid:
+      r: [4, 8]
+      alpha: [4, 8, 16]
+      init_std: [0.01]
+
+include_no_finetune: false
+
+extra:
+  untuned_lr: 0.03
+  lr_selection_modes: [tuned, untuned]

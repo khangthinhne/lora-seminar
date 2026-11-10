@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="720" viewBox="0 0 1180 720" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#37474f"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1180" height="720" fill="#ffffff"/>
+
+  <!-- Training panel -->
+  <rect x="20" y="30" width="1140" height="250" rx="10" fill="#f7f9fc" stroke="#b0bec5"/>
+  <text x="40" y="60" font-size="20" font-weight="600" fill="#263238">Training: frozen base plus trainable low-rank branch</text>
+
+  <rect x="50" y="150" width="100" height="44" rx="6" fill="#e3f2fd" stroke="#1e88e5"/>
+  <text x="65" y="177" font-size="15" fill="#0d47a1">x: (. . ., k)</text>
+
+  <rect x="220" y="95" width="190" height="52" rx="6" fill="#eceff1" stroke="#546e7a" stroke-dasharray="6 3"/>
+  <text x="235" y="118" font-size="15" fill="#263238">W0 frozen</text>
+  <text x="235" y="137" font-size="13" fill="#455a64">(d, k) - no gradient</text>
+
+  <rect x="220" y="190" width="150" height="44" rx="6" fill="#e8f5e9" stroke="#43a047"/>
+  <text x="235" y="217" font-size="15" fill="#1b5e20">A trainable (r, k)</text>
+
+  <rect x="410" y="190" width="150" height="44" rx="6" fill="#e8f5e9" stroke="#43a047"/>
+  <text x="425" y="217" font-size="15" fill="#1b5e20">B trainable (d, r)</text>
+
+  <rect x="600" y="190" width="140" height="44" rx="6" fill="#fff8e1" stroke="#f9a825"/>
+  <text x="615" y="210" font-size="14" fill="#6d4c00">multiply by</text>
+  <text x="625" y="227" font-size="14" fill="#6d4c00">alpha / r</text>
+
+  <circle cx="790" cy="150" r="18" fill="#ffffff" stroke="#37474f" stroke-width="2"/>
+  <text x="785" y="156" font-size="18" fill="#263238">+</text>
+
+  <rect x="850" y="128" width="140" height="44" rx="6" fill="#e3f2fd" stroke="#1e88e5"/>
+  <text x="865" y="155" font-size="15" fill="#0d47a1">h: (. . ., d)</text>
+
+  <line x1="150" y1="160" x2="215" y2="125" stroke="#37474f" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="150" y1="180" x2="215" y2="210" stroke="#37474f" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="370" y1="212" x2="405" y2="212" stroke="#37474f" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="380" y="203" font-size="12" fill="#546e7a">r</text>
+  <line x1="560" y1="212" x2="595" y2="212" stroke="#37474f" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="740" y1="205" x2="782" y2="166" stroke="#37474f" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="410" y1="121" x2="772" y2="146" stroke="#37474f" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="808" y1="150" x2="845" y2="150" stroke="#37474f" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="470" y="105" font-size="12" fill="#546e7a">k to d</text>
+  <text x="600" y="255" font-size="12" fill="#546e7a">adapter dimensions: k to r to d</text>
+
+  <!-- Inference panel -->
+  <rect x="20" y="310" width="560" height="180" rx="10" fill="#f7f9fc" stroke="#b0bec5"/>
+  <text x="40" y="340" font-size="20" font-weight="600" fill="#263238">Inference after merge</text>
+
+  <rect x="50" y="405" width="95" height="44" rx="6" fill="#e3f2fd" stroke="#1e88e5"/>
+  <text x="65" y="432" font-size="15" fill="#0d47a1">x: (. . ., k)</text>
+
+  <rect x="190" y="390" width="260" height="74" rx="6" fill="#eceff1" stroke="#546e7a"/>
+  <text x="205" y="417" font-size="15" fill="#263238">W' = W0 + (alpha / r) B A</text>
+  <text x="205" y="440" font-size="12" fill="#455a64">one dense layer, no adapter latency</text>
+
+  <rect x="485" y="405" width="80" height="44" rx="6" fill="#e3f2fd" stroke="#1e88e5"/>
+  <text x="497" y="432" font-size="14" fill="#0d47a1">h (. . ., d)</text>
+
+  <line x1="145" y1="427" x2="185" y2="427" stroke="#37474f" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="450" y1="427" x2="480" y2="427" stroke="#37474f" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- QLoRA panel -->
+  <rect x="600" y="310" width="560" height="300" rx="10" fill="#fbf7ff" stroke="#b39ddb"/>
+  <text x="620" y="340" font-size="20" font-weight="600" fill="#311b92">QLoRA composition</text>
+  <text x="620" y="364" font-size="13" fill="#5e35b1">frozen 4-bit base + high-precision adapter</text>
+
+  <rect x="620" y="455" width="80" height="44" rx="6" fill="#e3f2fd" stroke="#1e88e5"/>
+  <text x="632" y="482" font-size="14" fill="#0d47a1">x (. . ., k)</text>
+
+  <rect x="740" y="400" width="200" height="60" rx="6" fill="#ede7f6" stroke="#5e35b1" stroke-dasharray="6 3"/>
+  <text x="753" y="425" font-size="13" fill="#311b92">frozen base: simple absmax</text>
+  <text x="753" y="443" font-size="13" fill="#311b92">4-bit (NOT NF4)</text>
+
+  <rect x="740" y="500" width="200" height="60" rx="6" fill="#e8f5e9" stroke="#43a047"/>
+  <text x="753" y="525" font-size="13" fill="#1b5e20">A, B: high precision</text>
+  <text x="753" y="543" font-size="13" fill="#1b5e20">trainable LoRA adapter</text>
+
+  <circle cx="980" cy="480" r="18" fill="#ffffff" stroke="#37474f" stroke-width="2"/>
+  <text x="975" y="486" font-size="18" fill="#263238">+</text>
+
+  <rect x="1030" y="458" width="100" height="44" rx="6" fill="#e3f2fd" stroke="#1e88e5"/>
+  <text x="1042" y="485" font-size="14" fill="#0d47a1">h (. . ., d)</text>
+
+  <line x1="700" y1="465" x2="735" y2="438" stroke="#37474f" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="700" y1="490" x2="735" y2="520" stroke="#37474f" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="940" y1="440" x2="965" y2="466" stroke="#37474f" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="940" y1="530" x2="965" y2="495" stroke="#37474f" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="998" y1="480" x2="1025" y2="480" stroke="#37474f" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <text x="620" y="585" font-size="12" fill="#5e35b1">This project simulates QLoRA with simple absolute-max</text>
+  <text x="620" y="603" font-size="12" fill="#5e35b1">block quantization, not NF4.</text>
+
+  <text x="590" y="690" text-anchor="middle" font-size="13" font-style="italic" fill="#546e7a">Source: original diagram for this project (Team experiment, toy/synthetic context).</text>
+</svg>

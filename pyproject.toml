@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lora-lab"
+version = "0.1.0"
+description = "CS420 Seminar S08: reproducible toy experiments for LoRA and simulated QLoRA"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "torch>=2.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pandas>=1.5",
+    "matplotlib>=3.6",
+    "pytest>=7.0",
+    "ruff>=0.4",
+]
+hf = [
+    "peft>=0.7",
+    "transformers>=4.36",
+    "datasets>=2.14",
+    "accelerate>=0.25",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+exclude = [".opencode", ".git", "AGENT.md", "results", "report/diagram"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["lora_lab"]
+
+[tool.ruff.format]
+quote-style = "double"

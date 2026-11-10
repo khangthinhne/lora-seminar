@@ -1,0 +1,28 @@
+%% LoRA training, merged inference, and simulated QLoRA.
+%% Source: original diagram for this project (Team, synthetic/toy context).
+flowchart LR
+    subgraph training[Training: frozen base plus trainable low-rank branch]
+        direction LR
+        X1["x: (..., k)"] --> W0["W0 frozen: (d, k)"]
+        X1 --> A["A trainable: (r, k)"]
+        A --> B["B trainable: (d, r)"]
+        B --> SCALE["multiply by alpha / r"]
+        W0 --> ADD(("+"))
+        SCALE --> ADD
+        ADD --> H1["h: (..., d)"]
+    end
+
+    subgraph inference[Inference after merge: one dense layer]
+        direction LR
+        X2["x: (..., k)"] --> WP["W' = W0 + (alpha / r) B A"]
+        WP --> H2["h: (..., d)"]
+    end
+
+    subgraph qlora[QLoRA composition: quantized base plus high-precision adapter]
+        direction LR
+        X3["x: (..., k)"] --> QW["frozen 4-bit base (simple absmax, NOT NF4)"]
+        X3 --> AB["A, B in high precision"]
+        QW --> ADD2(("+"))
+        AB --> ADD2
+        ADD2 --> H3["h: (..., d)"]
+    end

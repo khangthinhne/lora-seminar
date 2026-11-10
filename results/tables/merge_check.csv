@@ -1,0 +1,5 @@
+configuration,method,max_abs_err,mean_abs_err,tolerance,all_ok,n_seeds,trainable_params
+Full fine-tuning,full_ft,5.245208740234375e-06,4.291534423828125e-06,1e-05,True,5,65536
+"LoRA r=4, alpha=16",lora,4.76837158203125e-06,4.100799560546875e-06,1e-05,True,5,2048
+"LoRA r=8, alpha=16",lora,4.291534423828125e-06,3.910064697265625e-06,1e-05,True,5,4096
+"LoRA r=16, alpha=16",lora,4.5299530029296875e-06,3.981590270996094e-06,1e-05,True,5,8192

@@ -1,0 +1,30 @@
+# exp03 (limitation): full-rank target with a decaying singular-value spectrum.
+# Small ranks cannot represent the spectral tail, so LoRA may lose to full FT.
+name: exp03_fullrank_target
+description: Full-rank decaying-spectrum target across several decay exponents.
+
+targets:
+  - name: decaying_spectrum
+    cfg:
+      gamma: 0.5
+      delta_scale: 0.5
+  - name: decaying_spectrum
+    cfg:
+      gamma: 1.0
+      delta_scale: 0.5
+  - name: decaying_spectrum
+    cfg:
+      gamma: 2.0
+      delta_scale: 0.5
+
+methods:
+  - name: full_ft
+    grid: {}
+  - name: lora
+    grid:
+      r: [1, 2, 4, 8, 16]
+      alpha: [16]
+      init_std: [0.01]
+
+include_no_finetune: true
+extra: {}

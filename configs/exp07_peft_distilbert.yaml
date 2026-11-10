@@ -1,0 +1,35 @@
+# exp07 (optional, requires GPU/Colab and `pip install -e .[hf]`).
+# This file is intentionally not run by `make all`. It is left unrun in this environment.
+name: exp07_peft_distilbert
+description: PEFT LoRA on DistilBERT/SST-2. Requires the optional hf extra and a GPU.
+
+data:
+  d: 768
+  k: 768
+  n_train: 1
+  n_val: 1
+  n_test: 1
+
+train:
+  epochs: 3
+  batch_size: 32
+  optimizer: adam
+  lr_grid: [0.0002]
+  weight_decay: 0.0
+
+seeds: [0]
+
+methods:
+  - name: lora
+    grid:
+      r: [4, 16]
+      alpha: [8, 32]
+      init_std: [0.01]
+
+include_no_finetune: false
+
+extra:
+  model_name: distilbert-base-uncased
+  dataset_name: sst2
+  max_length: 128
+  note: Requires GPU/Colab and the optional hf dependencies; not run by make all.

@@ -1,0 +1,55 @@
+data:
+  d: 256
+  k: 256
+  n_train: 1024
+  n_val: 256
+  n_test: 256
+  w0_std: 0.0625
+  obs_noise: 0.0
+train:
+  epochs: 50
+  batch_size: 128
+  optimizer: adam
+  lr_grid:
+  - 0.001
+  - 0.01
+  - 0.1
+  weight_decay: 0.0
+seeds:
+- 0
+- 1
+- 2
+- 3
+- 4
+target:
+  name: low_rank
+  cfg:
+    true_rank: 8
+    noise_std: 0.01
+    delta_scale: 0.5
+quantizer:
+  name: none
+  cfg: {}
+methods:
+- name: full_ft
+  grid: {}
+- name: lora
+  grid:
+    r:
+    - 4
+    - 8
+    alpha:
+    - 16
+    init_std:
+    - 0.01
+include_no_finetune: true
+extra:
+  quantizers:
+  - name: none
+    cfg: {}
+  - name: absmax_block4
+    cfg:
+      block_size: 64
+      bits: 4
+name: exp06_qlora_sim
+description: Simulated QLoRA with simple absmax block 4-bit quantization.

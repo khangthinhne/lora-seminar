@@ -1,0 +1,25 @@
+# exp04: compare the rank-r forward path with the merged dense linear layer.
+name: exp04_merge_check
+description: Numerical merge check for full fine-tuning and LoRA.
+
+target:
+  name: low_rank
+  cfg:
+    true_rank: 8
+    noise_std: 0.01
+    delta_scale: 0.5
+
+methods:
+  - name: full_ft
+    grid: {}
+  - name: lora
+    grid:
+      r: [4, 8, 16]
+      alpha: [16]
+      init_std: [0.01]
+
+include_no_finetune: false
+
+extra:
+  max_abs_err_threshold: 1.0e-5
+  eval_batch_size: 256

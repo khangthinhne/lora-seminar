@@ -1,0 +1,5 @@
+configuration,method,r,alpha,trainable_params,total_params,percent_of_full,reduction_factor
+Full fine-tuning,full_ft,,,1048576,1048576,100.0,1.0
+"LoRA r=4, alpha=16",lora,4,16,8192,1048576,0.78125,128.0
+"LoRA r=8, alpha=16",lora,8,16,16384,1048576,1.5625,64.0
+"LoRA r=16, alpha=16",lora,16,16,32768,1048576,3.125,32.0

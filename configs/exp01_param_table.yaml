@@ -1,0 +1,30 @@
+# exp01: analytical trainable-parameter and memory table (no training).
+# The 1024 x 1024 size is chosen because the table is analytical, not trained.
+name: exp01_param_table
+description: Trainable parameter counts and analytical memory for a 1024x1024 layer.
+
+data:
+  d: 1024
+  k: 1024
+  n_train: 8
+  n_val: 4
+  n_test: 4
+
+train:
+  epochs: 1
+  batch_size: 1
+
+methods:
+  - name: full_ft
+    grid: {}
+  - name: lora
+    grid:
+      r: [4, 8, 16]
+      alpha: [16]
+      init_std: [0.01]
+
+include_no_finetune: false
+
+extra:
+  dtype_bytes: 4
+  optimizer_states: 2

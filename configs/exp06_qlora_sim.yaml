@@ -1,0 +1,31 @@
+# exp06 (optional): LoRA on an original base weight versus a simple 4-bit quantized base.
+# This is NOT NF4 and must always be labelled as simulated 4-bit quantization.
+name: exp06_qlora_sim
+description: Simulated QLoRA with simple absmax block 4-bit quantization.
+
+target:
+  name: low_rank
+  cfg:
+    true_rank: 8
+    noise_std: 0.01
+    delta_scale: 0.5
+
+methods:
+  - name: full_ft
+    grid: {}
+  - name: lora
+    grid:
+      r: [4, 8]
+      alpha: [16]
+      init_std: [0.01]
+
+include_no_finetune: true
+
+extra:
+  quantizers:
+    - name: none
+      cfg: {}
+    - name: absmax_block4
+      cfg:
+        block_size: 64
+        bits: 4

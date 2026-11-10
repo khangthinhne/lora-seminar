@@ -1,0 +1,58 @@
+data:
+  d: 256
+  k: 256
+  n_train: 1024
+  n_val: 256
+  n_test: 256
+  w0_std: 0.0625
+  obs_noise: 0.0
+train:
+  epochs: 50
+  batch_size: 128
+  optimizer: adam
+  lr_grid:
+  - 0.001
+  - 0.01
+  - 0.1
+  weight_decay: 0.0
+seeds:
+- 0
+- 1
+- 2
+- 3
+- 4
+quantizer:
+  name: none
+  cfg: {}
+methods:
+- name: full_ft
+  grid: {}
+- name: lora
+  grid:
+    r:
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    alpha:
+    - 16
+    init_std:
+    - 0.01
+include_no_finetune: true
+extra: {}
+name: exp03_fullrank_target
+description: Full-rank decaying-spectrum target across several decay exponents.
+targets:
+- name: decaying_spectrum
+  cfg:
+    gamma: 0.5
+    delta_scale: 0.5
+- name: decaying_spectrum
+  cfg:
+    gamma: 1.0
+    delta_scale: 0.5
+- name: decaying_spectrum
+  cfg:
+    gamma: 2.0
+    delta_scale: 0.5

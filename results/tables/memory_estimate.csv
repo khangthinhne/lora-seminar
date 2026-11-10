@@ -1,0 +1,5 @@
+configuration,method,r,alpha,weight_bytes,gradient_bytes,optimizer_bytes,total_bytes
+Full fine-tuning,full_ft,,,4194304,4194304,8388608,16777216
+"LoRA r=4, alpha=16",lora,4,16,4194304,32768,65536,4292608
+"LoRA r=8, alpha=16",lora,8,16,4194304,65536,131072,4390912
+"LoRA r=16, alpha=16",lora,16,16,4194304,131072,262144,4587520

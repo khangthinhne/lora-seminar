@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrrrr}
+\toprule
+Configuration & Trainable params & \% of full & Reduction & Weights (MiB) & Grads (MiB) & Adam (MiB) & Total (MiB) \\
+\midrule
+Full fine-tuning & 1{,}048{,}576 & 100.000\% & $1\times$ & 4.000 & 4.000 & 8.000 & 16.000 \\
+LoRA $r=4$, $\alpha=16$ & 8{,}192 & 0.781\% & $128\times$ & 4.000 & 0.031 & 0.062 & 4.094 \\
+LoRA $r=8$, $\alpha=16$ & 16{,}384 & 1.562\% & $64\times$ & 4.000 & 0.062 & 0.125 & 4.188 \\
+LoRA $r=16$, $\alpha=16$ & 32{,}768 & 3.125\% & $32\times$ & 4.000 & 0.125 & 0.250 & 4.375 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Trainable parameters and analytical memory estimate for one $1024\times1024$ layer (float32, Adam). The memory columns count frozen weights, gradients, and two Adam moments per trainable parameter; activations are excluded, so these are not measured GPU memory. Source: Team experiment (toy, synthetic), exp01.}
+\label{tab:params_memory}
+\end{table}

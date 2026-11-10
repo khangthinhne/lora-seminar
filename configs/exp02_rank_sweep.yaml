@@ -1,0 +1,22 @@
+# exp02 (main): rank sweep against full fine-tuning on a rank-8 target.
+name: exp02_rank_sweep
+description: Rank sweep versus full fine-tuning with a low-rank synthetic target.
+
+target:
+  name: low_rank
+  cfg:
+    true_rank: 8
+    noise_std: 0.01
+    delta_scale: 0.5
+
+methods:
+  - name: full_ft
+    grid: {}
+  - name: lora
+    grid:
+      r: [1, 2, 4, 8, 16]
+      alpha: [16]
+      init_std: [0.01]
+
+include_no_finetune: true
+extra: {}
